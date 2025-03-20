@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Handle form submission
+        document.querySelector("#signup-form").addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent default form submission
+            window.location.href = "VV.html"; // Redirect to delivery page
+        });
+    
+        // Handle reset button functionality
+        document.querySelector(".reset-btn").addEventListener("click", function () {
+            document.querySelector("#signup-form").reset(); // Clears all input fields
+        });
+    });
+      </script>
+     <script src="particles.min.js"></script>
+     <script>
+         particlesJS.load('particles-js', 'particles-config.json', function() {
+             console.log('Particles loaded');
+         });
+     </script>
+     <style>
+        /* General Styling */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url('download.jpg') no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 8px solid black; /* Full black border around the page */
+}
+
+/* Login Container */
+.container {
+    width: 400px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+/* Right Side - Form */
+.right-side {
+    text-align: center;
+}
+
+/* Login Form */
+#login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Extra spacing between inputs */
+    padding-right: 0; /* Removed extra padding for scrollbar */
+}
+
+/* Input Fields */
+input {
+    width: 90%;
+    padding: 12px;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* Submit & Reset Buttons */
+.submit-btn, .reset-btn {
+    padding: 12px;
+    border: 1;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    width: 96%;
+    margin-bottom: 8px; /* Spacing between buttons */
+    margin-top: 8px;
+}
+
+.submit-btn {
+    background: #ff5200;
+    color: white;
+}
+
+.submit-btn:hover {
+    background: #e04800;
+    transform: scale(1.05);
+}
+
+.reset-btn {
+    background: #777;
+    color: white;
+}
+
+.reset-btn:hover {
+    background: #555;
+    transform: scale(1.05);
+}
+
+/* Login Links */
+p {
+    margin-top: 10px;
+}
+
+p a {
+    text-decoration: none;
+    color: #ff5200;
+    font-weight: bold;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+     </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side"></div>
+        <div class="right-side">
+            <h2>Create a New Account</h2>
+            <form id="signup-form">
+                <label>Username:</label>
+                <input type="text" required>
+
+                <label>Phone Number:</label>
+                <input type="tel" required>
+
+                <label>Password:</label>
+                <input type="password" required>
+
+                <label>Re-enter Password:</label>
+                <input type="password" required>
+
+                <label>Email:</label>
+                <input type="email" required>
+
+                <label>Date of Birth:</label>
+                <input type="date" required>
+
+                <label>Referral Code (Optional):</label>
+                <input type="text">
+
+        
+                <button type="submit" class="submit-btn">Submit</button>
+
+                <button type="reset" class="reset-btn">Reset</button>
+                
+                <p><a href="login.html">Already have an account?</a></p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

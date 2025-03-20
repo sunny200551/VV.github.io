@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vindu Vendors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+    <style>
+        /* General Page Styling */
+        body {
+    font-family: 'Arial', sans-serif;
+    background-color: rgb(252, 252, 248);
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    /*background: url('download.jpg') no-repeat center center/cover;*/
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+   /* background: linear-gradient(to right, #56ab2f, #e7bb0a);*/
+
+}
+
+        /* Branding Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to right, #000000, #181818);
+            padding: 15px;
+            color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'Chewy', cursive;
+            border: #d1e772 solid 2px;
+        }
+
+        nav button {
+            background: transparent;
+            color: rgb(245, 242, 242);
+            border: none;
+            font-size: 18px;
+            margin: 0 15px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        nav button:hover {
+            transform: scale(1.1);
+            text-decoration: underline;
+        }
+
+        /* Selection Buttons */
+    #selection button, #menuOptions button {
+    background-color: #fafcf8;
+    color: black;
+    padding: 20px 30px;
+    border: black solid;
+    border-radius: 25px;
+    margin: 100px;
+    font-size: 24px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+        #selection button:hover, #menuOptions button:hover {
+            background-color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        #vegIcon, #nonvegIcon {
+                width: 30px; /* Adjust the size as needed */
+                height: 30px; /* Adjust the size as needed */
+                margin-right: 10px; /* Add spacing between icon and text */
+                display: inline-block;
+                font-weight: bold;
+                font-size: 18px;
+                
+
+            }
+
+        /* Hotel Box Styling */
+        .hotel-box {
+            display: inline-block;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+            padding: 15px;
+            transition: 0.3s ease-in-out;
+            width: 250px;
+            text-align: center;
+        }
+
+        .hotel-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .hotel-box img {
+            width: 100%;
+            height: 150px;
+            border-radius: 8px;
+        }
+
+        .hotel-box button {
+            background-color: #ff6600;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .hotel-box button:hover {
+            background-color: #ff3300;
+        }
+
+        /* Food Items */
+        .food-box {
+            display: inline-block;
+            background: rgb(246, 242, 242);
+            border: black 3px solid;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px;
+            padding: 15px;
+            width: 200px;
+            text-align: center;
+            transition: 0.3s ease-in-out;
+        }
+
+        .food-box:hover {
+            transform: scale(1.05);
+        }
+
+        .food-box img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .food-box button {
+            background-color: #28a745;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        .food-box button:hover {
+            background-color: #218838;
+        }
+        .back-button {
+                background-color: #e0a40b; /* Yellow color */
+                color: black; /* Text color */
+                font-size: 16px; /* Font size */
+                padding: 10px 20px; /* Padding inside the button */
+                border: none; /* Remove default border */
+                border-radius: 8px; /* Rounded corners */
+                cursor: pointer; /* Pointer cursor on hover */
+                transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transitions */
+                margin: 20px; /* Add some margin around the button */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+            }
+
+            .back-button:hover {
+                background-color: #c98e0a; /* Slightly darker yellow on hover */
+                transform: scale(1.05); /* Slightly enlarge on hover */
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+            }
+
+.back-button:active {
+    transform: scale(0.95); /* Slightly shrink when clicked */
+}
+
+        /* Recipe Modal */
+        #recipeModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* Cart Styling */
+        #cartContainer {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+            padding: 20px;
+            width: 350px;
+            transition: 0.3s ease-in-out;
+        }
+
+        #cartContainer h2 {
+            color: #ff6600;
+        }
+
+        #cartContainer button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease-in-out;
+        }
+
+        #cartContainer button:hover {
+            background-color: #218838;
+        }
+
+        /* Go to Cart Button */
+        #cartButton {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #dc3545;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            display: none;
+            transition: 0.3s ease-in-out;
+        }
+
+        #cartButton:hover {
+            background-color: #c82333;
+            transform: scale(1.1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #intro, #selection, .hotel-box, .food-box {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        #foodSuggestions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.suggestion-item {
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+    width: 150px; /* Fixed width for all boxes */
+    height: 180px; /* Fixed height for all boxes */
+    border: 2px solid #ccc; /* Add a border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px; /* Add padding inside the box */
+    background-color: #f9f9f9; /* Light background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+}
+
+.suggestion-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Enhance shadow on hover */
+}
+
+.suggestion-item img {
+    width: 100px; /* Fixed width for images */
+    height: 100px; /* Fixed height for images */
+    border-radius: 10px; /* Rounded corners for images */
+    object-fit: cover; /* Ensure images fit nicely */
+}
+
+.suggestion-item p {
+    margin-top: 10px; /* Add spacing between image and text */
+    font-size: 16px; /* Adjust text size */
+    font-weight: bold; /* Make text bold */
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(100px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.fade-in {
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.slide-in-left {
+    animation: slideInLeft 1.5s ease-in-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 1.5s ease-in-out;
+}
+
+/* Food Info Section */
+.food-info {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin: 20px auto;
+    max-width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.food-info h2 {
+    color: #ff6600;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.food-info p {
+    font-size: 18px;
+    line-height: 1.6;
+    text-align: justify;
+    margin-bottom: 20px;
+}
+
+.food-info img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    margin: 20px 0;
+}
+
+.payment-container {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: black;
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .payment-btn {
+            background: #e0a40b;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-btn img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .payment-btn:hover {
+            background: #ffcc00;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .upi-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .upi-btn {
+            background: white;
+            border: 2px solid black;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .upi-btn img {
+            width: 25px;
+            height: 25px;
+        }
+
+        .upi-btn:hover {
+            background: #e0a40b;
+        }
+
+        input {
+            display: block;
+            width: 80%;
+            padding: 8px;
+            margin: 10px auto;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        #payNow {
+    display: none;
+    background: green;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    margin-top: 15px;
+    margin: auto;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    
+    /** Centering the button **/
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: auto;
+}
+
+
+        #payNow:hover {
+            background: darkgreen;
+        }
+
+        #successMessage {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #successMessage img {
+            width: 100px;
+            height: 100px;
+        }
+        
+        /* Proceed to Checkout Button */
+    #summary button {
+        background-color: #010302; /* Light green */
+        color: white; /* White text */
+        padding: 12px 12px; /* Padding inside the button */
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+        margin-top: 5px;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #222;
+    margin-bottom: 20px;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Recipe Box */
+.recipe-box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.recipe-box:hover {
+    transform: scale(1.02);
+}
+
+.recipe-box h3 {
+    font-size: 22px;
+    color: #e0a40b;
+    margin-bottom: 10px;
+}
+
+.recipe-box ul {
+    padding-left: 20px;
+}
+
+.recipe-box li {
+    font-size: 16px;
+    color: #444;
+    margin-bottom: 5px;
+}
+
+/* Checkout Section */
+#checkout-section {
+    display: none;
+    text-align: center;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.15);
+    width: 50%;
+    margin: 40px auto;
+}
+
+#checkout-section input {
+    width: 80%;
+    padding: 12px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+}
+
+#checkout-section button {
+    background: #e0a40b;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+#checkout-section button:hover {
+    background: #d08f09;
+}
+
+/* Proceed to Checkout Button */
+.proceed-btn {
+    display: block;
+    width: 200px;
+    background: #e0a40b;
+    color: white;
+    text-align: center;
+    padding: 12px;
+    margin: 20px auto;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    text-decoration: none;
+}
+
+.proceed-btn:hover {
+    background: #d08f09;
+}
+
+#delivery-time {
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    margin-top: 15px;
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <img src="VindhuVendors.png">
+        <nav>
+            <button onclick="showHome()">Home</button>
+            <button onclick="toggleMenu()">Menu</button>
+        </nav>
+    </header>
+
+    <div id="menuOptions" style="display: none;">
+        <button onclick="showSignUp()">Sign Up</button>
+        <button onclick="showLogin()">Sign In</button>
+    </div>
+
+    <section id="intro">
+        <h2>Welcome to Vindhu Vendors</h2>
+        <p>Delicious food delivered to your doorstep. Check out our special offers and popular dishes.</p>
+        <div id="specialOffers">
+            <h3>Today's Special</h3>
+            <p>Flat 20% off on all orders above ₹500!</p>
+            <p>🎉 Weekend Special: Buy 1 Get 1 Free on selected items!</p>
+        </div>
+        <div id="foodSuggestions">
+            <h3>Trending Dishes</h3>
+            <div class="suggestion-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQt_sgLzSDMkgmekV9wMU0IaeVoy4uCHHtTdw&s" alt="Chicken Biryani" width="100">
+                <p>Chicken Biryani</p>
+            </div>
+            <div class="suggestion-item">
+                <img src="https://media.istockphoto.com/id/1305516669/photo/shahi-paneer-or-paneer-kadai.webp?a=1&b=1&s=612x612&w=0&k=20&c=6FZjTED4AMVhUlQ6-fM__MMSds-h18jj7qFuZRKqFsk=" alt="Paneer Butter Masala" width="100">
+                <p>Paneer Butter Masala</p>
+            </div>
+        </div>
+    </section>
+
+    <div id="selection">
+        <button class="food-button" onclick="showHotels('veg')">
+            <img id="vegIcon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSrMiFM_AJxei0-KyqfxNkvnpH8pDeYqD_DhknUH95DfV15cfkDMsnFOSYYJo5-6WrRuY&usqp=CAU" alt="Veg"> Veg
+        </button>
+        <button class="food-button" onclick="showHotels('nonveg')">
+            <img id="nonvegIcon" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnArX0aZkNn-_Qwj7CrmvLFJzGDxruKZ1VHw&s
+            " alt="Non-Veg"> Non-Veg
+        </button>
+    </div>
+
+    <button onclick="goBack()" class="back-button">⬅ Back</button>
+
+    <div id="hotels"></div>
+    <div id="foods"></div>
+    <div id="summary" style="display: none;"></div>
+
+    <div id="cartContainer" style="display: none;">
+        <h2>Cart</h2>
+        <div id="cartItems"></div>
+        <button onclick="applyDiscount()">Get 20% Discount</button>
+        <div id="finalAmount" style="display: none;"></div>
+        <button onclick="proceedToPayment()">Place Your Order</button>
+    </div>
+
+    <button id="cartButton" onclick="showCart()" style="display: none;">Go to Cart</button>
+
+    <!-- Recipe Modal -->
+    <div id="recipeModal" style="display: none;">
+        <h2 id="recipeTitle"></h2>
+        <p><strong>Ingredients:</strong></p>
+        <ul id="recipeIngredients"></ul>
+        <p><strong>Steps:</strong></p>
+        <ol id="recipeSteps"></ol>
+        <button onclick="closeRecipeModal()">Close</button>
+    </div>
+
+    <div id="overlay" style="display: none;"></div>
+    <div id="successMessage" style="display: none;">
+        Payment Successful! Redirecting to the main page...
+    </div>
+
+    <footer>
+        <p>2025 Vindhu Vendors. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Show and hide Menu options
+function toggleMenu() {
+    let menuOptions = document.getElementById("menuOptions");
+    let selection = document.getElementById("selection");
+
+    if (menuOptions.style.display === "none" || menuOptions.style.display === "") {
+        menuOptions.style.display = "block";
+        selection.style.display = "none";
+    } else {
+        menuOptions.style.display = "none";
+        selection.style.display = "block";
+    }
+}
+
+// Open Sign Up and Login pages
+function showSignUp() {
+    window.open("signup.html");
+}
+
+function showLogin() {
+    window.open("login.html");
+}
+
+// Show Home Page
+function showHome() {
+    location.reload();
+}
+
+// Display hotels when Veg or Non-Veg is selected
+function showHotels(type) {
+    document.getElementById("menuOptions").style.display = "none";
+    document.getElementById("selection").style.display = "none";
+
+    let hotelsDiv = document.getElementById("hotels");
+    let foodsDiv = document.getElementById("foods");
+    hotelsDiv.innerHTML = "";
+    foodsDiv.innerHTML = "";
+
+    let vegHotels = [
+        { name: "Sri Annapurna", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTjQyq1KojiCMVMkmxKdw3JK63YeiR0htmkyQ&s" },
+        { name: "Rajadhani Bhojanam", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWP9xpHeBrg27ZCnb06GTDyUsmT330LXOwBw&s" },
+        { name: "Chutneys", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwHidJirFHp4PuXAZGQKWhrsqNUn3WVR-zog&s" },
+        { name: "Minerva Coffee Shop", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVrBmCMI_Rj2Qx3IgBzpergKtdv_6ZHRx7cA&s" },
+        { name: "Ulavacharu", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToq3kzfPdjFd5fhctgTkES2qbJ76t1XxJIBw&s" }
+    ];
+
+    let nonVegHotels = [
+        { name: "Rayalaseema Ruchulu", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNZvZrquGthNDhBIb_EI_ilCmKUr0gl9ICHA&s" },
+        { name: "Mehfil", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6pX9hJKM3GlVhpq1gVu_ftCqh3WllH_uILQ&s" },
+        { name: "Bawarchi", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRV_T-FdcpT9iqgbsoUrTBiBOryZJVb-pFGjg&s" },
+        { name: "Paradise", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR85ZVUzvreHd8GvCPAeZNPb47BRfNqLLVydw&s" },
+        { name: "Shah Ghouse", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4ElWTxwMLu9F_oWbadClE2WRVqoe3aOrR0B6cZKp7tee3AKLw1msz2SE&s" }
+    ];
+
+    let selectedHotels = (type === "veg") ? vegHotels : nonVegHotels;
+
+    selectedHotels.forEach(hotel => {
+        let hotelBox = document.createElement("div");
+        hotelBox.className = "hotel-box";
+        hotelBox.innerHTML = `
+            <h3>${hotel.name}</h3>
+            <img src="${hotel.image}" alt="${hotel.name}" width="150px">
+            <button onclick="showMenu('${hotel.name}', '${type}')">View Menu</button>
+        `;
+        hotelsDiv.appendChild(hotelBox);
+    });
+}
+
+// Food Items
+let vegItems = [
+    { name: "Paneer Butter Masala", image: "https://media.istockphoto.com/id/1305516669/photo/shahi-paneer-or-paneer-kadai.webp?a=1&b=1&s=612x612&w=0&k=20&c=6FZjTED4AMVhUlQ6-fM__MMSds-h18jj7qFuZRKqFsk=", price: 200 },
+    { name: "Vegetable Biryani", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZUzLQkBzX6YNmARgBY9n5qQaB89JuV5MJsg&s", price: 180 },
+    { name: "Gobi Manchurian", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQyUvDYwxBKquORb3v4T9OOKkkE4YBK5u-pcQ&s", price: 150 },
+    { name: "Dosa", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTROvUyGa19-6dcCd-JXP65EKnz6caaR3BwDg&s", price: 100 },
+    { name: "Idli Sambar", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQapyamNenAHqVbXoadXn-f2FJkJtwFT_nDoQ&s", price: 80 },
+    { name: "Masala Vada", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7uKjyw8L7cBM8z_-aGknWz3ghjl4J7CnXLw&s", price: 60 },
+    { name: "Palak Paneer", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTU9K30a-OqS0JNLGLMl6uGoE9gTMSL65gxvg&s", price: 190 },
+    { name: "Dal Makhani", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsPAu1eITBpmnB6LCSPX9OuXAV5sSvFMqpDg&s", price: 170 },
+    { name: "Aloo Paratha", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQEdFl2mICl2dQ6Xokg3tQqaQNHhBYm3ztGA&s", price: 150 }
+];
+
+let nonVegItems = [
+    { name: "Chicken Biryani", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRk6-OozOMHat4yI--HO9KtywHWUmnlC3hVxw&s", price: 250 },
+    { name: "Mutton Curry", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvlazBu3W0kRXolhzAD3pS2xudbgsk8gCA-Q&s", price: 300 },
+    { name: "Prawns Fry", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrOQxLFeRo7DxCCeCMZo_h79nHRUsQYEkitg&s", price: 280 },
+    { name: "Fish Curry", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-t7VZmXne-6HYnCgCJX1wrFj4pXTxBJUA3Q&s", price: 260 },
+    { name: "Chicken 65", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRqGLilyTieIWAtT4Bid74cFW-tIMzHlkgGjg&s", price: 220 },
+    { name: "Butter Chicken", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSL9OhJpZ6AFItoLlDNin3ZPTZH27Bgi_n0Uw&s", price: 270 },
+    { name: "Hyderabadi Haleem", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcm87kAAFkpE6y9fqCXa5XB5qX3A10G6NJwQ&s", price: 300 },
+    { name: "Egg Curry", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNHDpIps8re1t_-gSQokn-2g8Q1Oyjj16Jmg&s", price: 180 },
+    { name: "Tandoori Chicken", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5W1LbBpY-GyGKazSFGQGvBYg1JjkpAyrdcQ&s", price: 260 }
+];
+
+// Show Menu for a Selected Hotel
+function showMenu(hotel, type) {
+    document.getElementById("hotels").innerHTML = "";
+    let foodsDiv = document.getElementById("foods");
+    foodsDiv.innerHTML = `<h2>${hotel} - Menu</h2>`;
+
+    let selectedItems = (type === "veg") ? vegItems : nonVegItems;
+
+    selectedItems.forEach(item => {
+        let rating = (Math.random() * 2 + 3).toFixed(1); // ⭐ Random rating (3.0 - 5.0)
+        let itemBox = document.createElement("div");
+        itemBox.className = "food-box";
+        itemBox.innerHTML = `
+            <h4>${item.name} ⭐ ${rating}</h4>
+            <img src="${item.image}" alt="${item.name}" width="120px" onclick="showRecipe('${item.name}')">
+            <p>Price: ₹${item.price}</p>
+            <button onclick="addToCart('${item.name}', ${item.price})">Add</button>
+        `;
+        foodsDiv.appendChild(itemBox);
+    });
+}
+
+// Show Recipe Modal
+function showRecipe(itemName) {
+    let recipe = getRecipeDetails(itemName); // Get recipe details
+    document.getElementById("recipeTitle").innerText = itemName;
+    document.getElementById("recipeIngredients").innerHTML = recipe.ingredients.map(ing => `<li>${ing}</li>`).join("");
+    document.getElementById("recipeSteps").innerHTML = recipe.steps.map(step => `<li>${step}</li>`).join("");
+    document.getElementById("recipeModal").style.display = "block";
+    document.getElementById("overlay").style.display = "block";
+}
+
+// Close Recipe Modal
+function closeRecipeModal() {
+    document.getElementById("recipeModal").style.display = "none";
+    document.getElementById("overlay").style.display = "none";
+}
+
+// Recipe Details Function
+function getRecipeDetails(itemName) {
+    const recipes = {
+        "Chicken Biryani": {
+            ingredients: ["Basmati Rice", "Marinated Meat", "Saffron", "Spices", "Ghee"],
+            steps: [
+                "Step 1: Marinate the meat with spices, yogurt, and lemon juice for 4-6 hours.",
+                "Step 2: Parboil the basmati rice with whole spices.",
+                "Step 3: Layer the rice and marinated meat, add saffron milk, seal the pot, and slow cook for 45 minutes.",
+                "Step 4: Garnish with fried onions and fresh coriander before serving."
+            ]
+        },
+        "Butter Chicken": {
+            ingredients: ["Chicken", "Tomatoes", "Butter", "Cream", "Spices"],
+            steps: [
+                "Step 1: Marinate chicken with yogurt, lemon juice, and spices for 3 hours, then grill it.",
+                "Step 2: Prepare a rich tomato-based gravy with butter and cashew paste.",
+                "Step 3: Add grilled chicken to the gravy, simmer with cream, and cook until thick and aromatic.",
+                "Step 4: Serve with naan or basmati rice."
+            ]
+        },
+        "Paneer Butter Masala": {
+            ingredients: ["Paneer", "Tomatoes", "Cashew Paste", "Cream", "Butter", "Spices"],
+            steps: [
+                "Step 1: Sauté onions, tomatoes, and cashew paste in butter.",
+                "Step 2: Blend into a smooth gravy, then cook with cream and spices.",
+                "Step 3: Add paneer cubes and simmer for 10 minutes until soft and flavorful.",
+                "Step 4: Garnish with fresh coriander and serve hot with naan or jeera rice."
+            ]
+        },
+        "Vegetable Biryani": {
+            ingredients: ["Basmati Rice", "Mixed Vegetables", "Spices", "Yogurt", "Saffron"],
+            steps: [
+                "Step 1: Sauté onions, ginger, garlic, and whole spices.",
+                "Step 2: Add mixed vegetables and cook with yogurt and biryani spices.",
+                "Step 3: Layer with cooked basmati rice and saffron milk.",
+                "Step 4: Cover and cook on low heat for 20 minutes for the perfect dum biryani."
+            ]
+        },
+        "Gobi Manchurian": {
+            ingredients: ["Cauliflower", "Cornflour", "Soy Sauce", "Garlic", "Spring Onions"],
+            steps: [
+                "Step 1: Coat cauliflower florets with spiced batter and deep-fry until crispy.",
+                "Step 2: Prepare a Manchurian sauce with soy sauce, garlic, and chili paste.",
+                "Step 3: Toss the fried cauliflower in the sauce and garnish with spring onions.",
+                "Step 4: Serve hot with fried rice or noodles."
+            ]
+        },
+        "Dosa": {
+            ingredients: ["Rice Batter", "Lentils", "Salt", "Oil"],
+            steps: [
+                "Step 1: Soak rice and lentils separately, then grind into a smooth batter.",
+                "Step 2: Ferment overnight for a tangy taste.",
+                "Step 3: Pour batter on a hot pan, spread thin, and cook until crispy.",
+                "Step 4: Serve with coconut chutney and sambar."
+            ]
+        },
+        "Masala Vada": {
+            ingredients: ["Chana Dal", "Onions", "Green Chilies", "Curry Leaves", "Spices"],
+            steps: [
+                "Step 1: Soak chana dal for 3 hours, then coarsely grind.",
+                "Step 2: Mix with onions, green chilies, and curry leaves.",
+                "Step 3: Shape into patties and deep fry until golden brown.",
+                "Step 4: Serve hot with coconut chutney or tomato ketchup."
+            ]
+        },
+        "Palak Paneer": {
+            ingredients: ["Spinach", "Paneer", "Garlic", "Cream", "Spices"],
+            steps: [
+                "Step 1: Blanch spinach leaves, then blend into a smooth paste.",
+                "Step 2: Sauté garlic and spices, then add the spinach puree.",
+                "Step 3: Add paneer cubes and cook for 5 minutes.",
+                "Step 4: Finish with cream and serve with roti or rice."
+            ]
+        },
+        "Aloo Paratha": {
+            ingredients: ["Whole Wheat Flour", "Potatoes", "Green Chilies", "Spices", "Butter"],
+            steps: [
+                "Step 1: Boil and mash potatoes, then mix with spices and green chilies.",
+                "Step 2: Stuff inside a rolled-out wheat dough and seal.",
+                "Step 3: Cook on a tawa with butter until golden brown.",
+                "Step 4: Serve hot with curd and pickle."
+            ]
+        },
+        "Prawns Fry": {
+            ingredients: ["Prawns", "Garlic", "Red Chili Powder", "Curry Leaves", "Oil"],
+            steps: [
+                "Step 1: Marinate prawns with garlic, chili powder, and salt for 30 minutes.",
+                "Step 2: Sauté curry leaves, then add prawns and stir-fry until crispy.",
+                "Step 3: Cook on medium heat for 10 minutes.",
+                "Step 4: Garnish with lemon slices and serve hot."
+            ]
+        },
+        "Fish Curry": {
+            ingredients: ["Fish", "Coconut Milk", "Tamarind", "Spices", "Garlic"],
+            steps: [
+                "Step 1: Fry fish pieces until golden brown.",
+                "Step 2: Prepare a tamarind-based spicy coconut gravy.",
+                "Step 3: Add fish and simmer for 15 minutes until flavors blend.",
+                "Step 4: Serve with steamed rice."
+            ]
+        },
+        "Chicken 65": {
+            ingredients: ["Chicken", "Yogurt", "Red Chili Powder", "Curry Leaves", "Garlic"],
+            steps: [
+                "Step 1: Marinate chicken pieces with spices and yogurt for 2 hours.",
+                "Step 2: Deep fry until crispy.",
+                "Step 3: Toss with garlic, curry leaves, and chili paste for extra flavor.",
+                "Step 4: Serve hot as a starter."
+            ]
+        },
+        "Hyderabadi Haleem": {
+            ingredients: ["Mutton", "Wheat", "Lentils", "Spices", "Ghee"],
+            steps: [
+                "Step 1: Slow-cook mutton with wheat and lentils for several hours.",
+                "Step 2: Mash into a smooth, thick consistency.",
+                "Step 3: Add spices, fried onions, and ghee for a rich taste.",
+                "Step 4: Garnish with lemon juice and serve warm."
+            ]
+        },
+        "Egg Curry": {
+            ingredients: ["Eggs", "Tomatoes", "Onions", "Coconut Milk", "Spices"],
+            steps: [
+                "Step 1: Boil and peel eggs, then lightly fry them.",
+                "Step 2: Prepare a rich tomato and coconut-based gravy.",
+                "Step 3: Add eggs and simmer for 10 minutes.",
+                "Step 4: Serve with roti or rice."
+            ]
+        }
+    };
+    return recipes[itemName] || { ingredients: [], steps: [] };
+}
+
+// Function to Proceed to Checkout
+function proceedToCheckout() {
+    document.getElementById("menu-section").style.display = "none"; // Hide menu
+    document.getElementById("checkout-section").style.display = "block"; // Show checkout form
+
+    // Get current time and add 30 minutes
+    let currentTime = new Date();
+    currentTime.setMinutes(currentTime.getMinutes() + 30);
+    document.getElementById("delivery-time").innerText = "Estimated Delivery Time: " + currentTime.toLocaleTimeString();
+}
+
+
+// Cart Functionality
+let cart = [];
+
+function addToCart(itemName, itemPrice) {
+    let existingItem = cart.find(item => item.name === itemName);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ name: itemName, price: itemPrice, quantity: 1 });
+    }
+
+    localStorage.setItem("orderItems", JSON.stringify(cart));
+
+    let total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    localStorage.setItem("billAmount", total);
+
+    (`${itemName} added to cart!`);
+
+    updateCartSummary();
+}
+
+function updateCartSummary() {
+    let summaryDiv = document.getElementById("summary");
+    summaryDiv.innerHTML = "<h3>Order Summary</h3>";
+    summaryDiv.style.display = "block";
+
+    let total = 0;
+    cart.forEach((cartItem, index) => {
+        total += cartItem.price * cartItem.quantity;
+        summaryDiv.innerHTML += `
+            <p>${cartItem.name} - ₹${cartItem.price} x ${cartItem.quantity} 
+            <button onclick="decreaseQuantity(${index})">-</button></p>
+        `;
+    });
+
+    summaryDiv.innerHTML += `<h4>Total: ₹${total}</h4>`;
+    summaryDiv.innerHTML += `<button onclick="showCart()">Proceed to Checkout</button>`;
+}
+
+function decreaseQuantity(index) {
+    if (cart[index].quantity > 1) {
+        cart[index].quantity -= 1;
+    } else {
+        cart.splice(index, 1); // Remove item if quantity is 1
+    }
+    updateCartSummary();
+}
+
+
+function showCart() {
+    let cartContainer = document.getElementById("cartContainer");
+    let cartItemsDiv = document.getElementById("cartItems");
+
+    cartContainer.style.display = "block";
+    cartItemsDiv.innerHTML = "<h3>Your Cart</h3>";
+
+    let total = 0;
+    cart.forEach(cartItem => {
+        total += cartItem.price * cartItem.quantity;
+        cartItemsDiv.innerHTML += `
+            <p>${cartItem.name} - ₹${cartItem.price} x ${cartItem.quantity} = ₹${cartItem.price * cartItem.quantity}</p>
+        `;
+    });
+
+    cartItemsDiv.innerHTML += `<h3>Total: ₹${total}</h3>`;
+}
+
+// Apply Discount
+function applyDiscount() {
+    let cartTotal = calculateTotal();
+    let discount = cartTotal >= 500 ? cartTotal * 0.2 : 0;
+    let finalTotal = cartTotal - discount;
+    document.getElementById("finalAmount").style.display = "block";
+    document.getElementById("finalAmount").innerHTML = `
+        <h3>Order Summary</h3>
+        <p>Original Total: ₹${cartTotal}</p>
+        <p>Discount (20%): -₹${discount}</p>
+        <h3>Final Amount: ₹${finalTotal}</h3>
+    `;
+    localStorage.setItem("billAmount", finalTotal);
+}
+
+function calculateTotal() {
+    let total = 0;
+    cart.forEach(cartItem => {
+        total += cartItem.price * cartItem.quantity;
+    });
+    return total;
+}
+
+// Proceed to Payment
+function proceedToPayment() {
+    let finalTotal = localStorage.getItem("billAmount") || 0;
+    window.open("payment.html");
+}
+
+// Go Back
+function goBack() {
+    document.getElementById("menuOptions").style.display = "none";
+    document.getElementById("hotels").innerHTML = "";
+    document.getElementById("foods").innerHTML = "";
+    document.getElementById("summary").style.display = "none";
+    document.getElementById("cartContainer").style.display = "none";
+    document.getElementById("selection").style.display = "block";
+}
+
+// Trigger animations on scroll
+document.addEventListener("scroll", () => {
+    const foodInfo = document.querySelector(".food-info");
+    const foodSuggestions = document.querySelector("#foodSuggestions");
+
+    if (isElementInViewport(foodInfo)) {
+        foodInfo.classList.add("slide-in-left");
+    }
+
+    if (isElementInViewport(foodSuggestions)) {
+        foodSuggestions.classList.add("slide-in-right");
+    }
+});
+
+// Check if an element is in the viewport
+function isElementInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    );
+}
+</script>
+</body>
+</html>

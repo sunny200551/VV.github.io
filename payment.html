@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment - Vindu Vendors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Arsenal+SC:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">  
+      <style>
+        body {
+            font-family: 'Chewy', cursive;
+            background-color: white;
+            text-align: center;
+            color: black;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .payment-container {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            color: black;
+        }
+
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .payment-btn {
+            background: #e0a40b;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .payment-btn img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .payment-btn:hover {
+            background: #ffcc00;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .upi-options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .upi-btn {
+            background: white;
+            border: 2px solid black;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: 0.3s ease-in-out;
+        }
+
+        .upi-btn img {
+            width: 25px;
+            height: 25px;
+        }
+
+        .upi-btn:hover {
+            background: #e0a40b;
+        }
+
+        input {
+            display: block;
+            width: 80%;
+            padding: 8px;
+            margin: 10px auto;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        #payNow {
+    display: none;
+    background: green;
+    color: white;
+    padding: 12px 20px;
+    font-size: 18px;
+    margin-top: 25px;
+    margin: auto;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+    
+    /** Centering the button 
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: auto;**/
+}
+
+
+        #payNow:hover {
+            background: darkgreen;
+        }
+
+        #successMessage {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #successMessage img {
+            width: 100px;
+            height: 100px;
+        }
+
+	
+        #payNow:hover {
+            background: darkgreen;
+        }
+
+        #successMessage {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        #successMessage img {
+            width: 100px;
+            height: 100px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .summary-box {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .summary-box ul {
+            padding-left: 20px;
+        }
+
+        .summary-box li {
+            font-size: 16px;
+            color: #444;
+        }
+
+        .estimated-time {
+            font-size: 18px;
+            font-weight: bold;
+            color: #d08f09;
+            margin-top: 15px;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Order Summary</h2>
+        <div class="summary-box">
+            <h3>Your Order</h3>
+            <ul id="orderSummary"></ul>
+            <p><strong>Total Amount: ₹<span id="totalAmount">0</span></strong></p>
+            <p class="estimated-time">Estimated Delivery Time: <span id="deliveryTime"></span></p>
+        
+
+    <div class="payment-container">
+        <h2>Complete Your Payment</h2>
+       
+
+        <div class="payment-options">
+            <button class="payment-btn" onclick="showUPI()"> 
+                <img src="https://i.pinimg.com/474x/6c/08/05/6c0805b924906d8d11aa31165baefeca.jpg" alt="UPI"> UPI Payment
+            </button>
+            <button class="payment-btn" onclick="showCard()"> 
+                <img src="https://i.pinimg.com/736x/fa/7c/0f/fa7c0f21cfdedf01422005e599f59519.jpg" alt="Card"> Credit / Debit Card
+            </button>
+            <button class="payment-btn" onclick="showCOD()"> 
+                <img src="https://i.pinimg.com/474x/47/90/f4/4790f4779df6c6d2aeba911e215e8f42.jpg" alt="COD"> Cash on Delivery
+            </button>
+        </div>
+
+        <!-- UPI Payment Section -->
+        <div id="upiSection" class="hidden">
+            <h3>Select UPI App</h3>
+            <div class="upi-options">
+                <button class="upi-btn" onclick="selectUPI('PhonePe')"><img src="https://i.pinimg.com/474x/ae/5f/e3/ae5fe3dc423e44c0ddbef5dc64fa356b.jpg" alt="PhonePe">PhonePe</button>
+                <button class="upi-btn" onclick="selectUPI('Google Pay')"><img src="https://i.pinimg.com/474x/ea/4d/f5/ea4df535ef139dc6b904040a8323095f.jpg" alt="Google Pay">Google Pay</button>
+                <button class="upi-btn" onclick="selectUPI('Paytm')"><img src="https://i.pinimg.com/736x/29/7a/18/297a18bfb75f78339c1d8a91f0dd48a9.jpg" alt="Paytm">Paytm</button>
+                <button class="upi-btn" onclick="selectUPI('Amazon Pay')"><img src="https://i.pinimg.com/474x/a7/05/e8/a705e8b66f7a9bc97f7f3bdb6d000f9b.jpg" alt="Amazon Pay">Amazon Pay</button>
+                <button class="upi-btn" onclick="selectUPI('BHIM UPI')"><img src="https://i.pinimg.com/474x/75/ef/bf/75efbf7c2561a7ad650fef8735ab16e5.jpg" alt="BHIM UPI">BHIM UPI</button>
+                <button class="upi-btn" onclick="selectUPI('Other UPI')"><img src="https://i.pinimg.com/474x/67/c8/7d/67c87d420f58c250b3b7aecb034350b6.jpg" alt="Other">Other UPI</button>
+            </div>
+            <div id="upiInputSection" class="hidden">
+                <label for="upiID">Enter UPI ID:</label>
+                <input type="text" id="upiID" placeholder="example@upi">
+            </div>
+        </div>
+
+        <!-- Card Payment Section -->
+        <div id="cardSection" class="hidden">
+            <h3>Enter Card Details</h3>
+            <input type="text" placeholder="Card Number" maxlength="16">
+            <input type="text" placeholder="Card Holder Name">
+            <input type="text" placeholder="Expiry Date (MM/YY)" maxlength="5">
+            <input type="password" placeholder="CVV" maxlength="3">
+        </div>
+
+        <!-- COD Section -->
+        <div id="codSection" class="hidden">
+            <p>Pay on delivery</p>
+        </div>
+
+        <!-- Pay Now Button -->
+        <button id="payNow" class="hidden" onclick="confirmPayment()">Pay Now</button>
+
+        <!-- Payment Success Message -->
+        <div id="successMessage" class="hidden">
+            <img src="tick.png" alt="Payment Successful">
+            <h2>Payment Successful!</h2>
+        </div>
+    </div>
+
+
+
+        <div id="successMessage" class="hidden">
+            <h2 id="thankYou"></h2>
+            <p>Transaction ID: <span id="transactionID"></span></p>
+            <p>Paid via: <span id="paymentMethod"></span></p>
+            <p>Redirecting to homepage...</p>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+    let totalAmount = localStorage.getItem("billAmount") || 0;
+    let orderItems = JSON.parse(localStorage.getItem("orderItems")) || [];
+
+    document.getElementById("totalAmount").innerText = totalAmount;
+    let orderList = document.getElementById("orderSummary");
+
+    orderItems.forEach(item => {
+        let listItem = document.createElement("li");
+        listItem.textContent = `${item.name} - ₹${item.price} (x${item.quantity})`;
+        orderList.appendChild(listItem);
+    });
+
+    let now = new Date();
+    now.setMinutes(now.getMinutes() + 30);
+    document.getElementById("deliveryTime").innerText = now.toLocaleTimeString();
+});
+
+// Function to hide all payment sections
+function hideAll() {
+    document.getElementById("upiSection")?.classList.add("hidden");
+    document.getElementById("cardSection")?.classList.add("hidden");
+    document.getElementById("codSection")?.classList.add("hidden");
+    document.getElementById("upiInputSection")?.classList.add("hidden");
+    document.getElementById("payNow").style.display = "none"; // Hide Pay Now initially
+}
+        function showUPI() {
+            hideAll();
+            document.getElementById("upiSection").style.display = "block";
+        }
+
+        function showCard() {
+            hideAll();
+            document.getElementById("cardSection").style.display = "block";
+        }
+
+        function showCOD() {
+            hideAll();
+            document.getElementById("codSection").style.display = "block";
+            document.getElementById("payNow").style.display = "block";
+        }
+
+        function selectUPI(appName) {
+            document.getElementById("upiInputSection").style.display = "block";
+            document.getElementById("payNow").style.display = "none";
+        }
+
+        function hideAll() {
+            document.getElementById("upiSection").style.display = "none";
+            document.getElementById("cardSection").style.display = "none";
+            document.getElementById("codSection").style.display = "none";
+            document.getElementById("upiInputSection").style.display = "none";
+            document.getElementById("payNow").style.display = "none";
+        }
+
+        document.querySelectorAll("input").forEach(input => {
+            input.addEventListener("input", () => {
+                document.getElementById("payNow").style.display = "block";
+            });
+        });
+
+        function confirmPayment() {
+            hideAll();
+            document.getElementById("successMessage").style.display = "block";
+            setTimeout(() => {
+                window.location.href = "VV.html";
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
